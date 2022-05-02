@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			Snowtricks -
+			{% block title %}{% endblock %}
+		</title>
+
+
+		<meta
+		charset="utf-8">
+		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<link rel="shortcut icon" href="{{asset('assets/img/ico/favicon.ico')}}">
+		<link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/ico/apple-touch-icon-144x144.png')}}">
+		<link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/ico/apple-touch-icon-114x114.png')}}">
+		<link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/ico/apple-touch-icon-72x72.png')}}">
+		<link
+		rel="apple-touch-icon" href="{{asset('assets/img/ico/apple-touch-icon-57x57.png')}}">
+
+
+		<!-- Bootstrap Core CSS -->
+		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+		<link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
+		<link
+		href="{{asset('assets/css/plugins.css')}}" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link
+		href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="{{asset('assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{asset('assets/css/pe-icons.css')}}" rel="stylesheet">
+	</head>
+
+
+	<body id="page-top" class="index">
+
+		<div class="master-wrapper">
+
+			<div class="preloader">
+				<div class="preloader-img">
+					<span class="loading-animation animate-flicker"><img src="{{asset('assets/img/loading.GIF')}}" alt="loading"/></span>
+				</div>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-default navbar-fixed-top fadeInDown" data-wow-delay="0.5s">
+				<div class="top-bar smoothie hidden-xs">
+					<div class="container">
+						<div class="clearfix">
+							<ul class="list-inline social-links wow pull-left">
+
+								<a href="#">
+									<i class="fa fa-linkedin"></i>
+								</a>
+							</ul>
+
+
+							<ul class="list-inline pull-right text-right">
+								{% if is_granted('ROLE_USER') %}
+									<ul>
+										<li>{{ app.user.username }}
+
+
+											<a href="{{ path('logout') }}" class="btn-xs">
+												<i class="fa fa-sign-out"></i>
+											</a>
+										</li>
+
+									</ul>
+								{% else %}
+									<ul>
+										<a href="{{ path('login') }}">
+											Connexion
+										</a>
+									</ul>
+								{% endif %}
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div
+					class="container">
+
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand smoothie logo logo-light" href="/"><img src="{{asset('assets/img/logo.png')}}" alt="logo"></a>
+						<a class="navbar-brand smoothie logo logo-dark" href="/"><img src="{{asset('assets/img/logo_reverse.png')}}" alt="logo"></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="main-navigation">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="{{ path('home') }}">Accueil
+								</a>
+							</li>
+
+							<li class="dropdown">
+								<a href="{{path ('creation_trick')}}">Créer un trick
+								</a>
+
+							</li>
+
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+			{% block body %}{% endblock %}
+
+			<div id="footer-wrapper" class="footer-image-bg">
+
+
+				<footer class="white-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 text-center match-height">
+								<div class="vertical-center">
+									<span class="copyright">Copyright 2021. Jordan Deyme pour OpenClassrooms</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+
+	</body>
+
+
+	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('assets/js/plugins.js')}}"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="{{asset('assets/js/init.js')}}"></script>
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+																																																																																																																																																																																								        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+																																																																																																																																																																																								        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+																																																																																																																																																																																								    <![endif]-->
+
+		<script type="text/javascript"> $(document).ready(function () {
+'use strict';
+jQuery('#headerwrap').backstretch([
+"assets/img/bg/bg1.jpg", "assets/img/bg/bg2.jpg", "assets/img/bg/bg3.jpg"
+], {
+duration: 8000,
+fade: 500
+});
+});
+	</script>
+</html></body></html></html></html>
