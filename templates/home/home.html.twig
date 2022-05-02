@@ -1,0 +1,60 @@
+{% extends '/base.html.twig' %}
+{% block title %}
+	Accueil
+{% endblock %}
+{% block body %}
+
+	<!-- Header -->
+	<header id="headerwrap" class="dark-wrapper backstretched special-max-height no-overlay">
+		<div class="container vertical-center">
+			<div class="intro-text vertical-center text-left smoothie">
+				<div class="intro-heading wow fadeIn heading-font" data-wow-delay="0.2s">Snowtricks</div>
+				<div class="intro-sub-heading wow fadeIn secondary-font" data-wow-delay="0.4s">Site communautaire pour<span class="rotate">
+						apprendre des tricks, créer des tricks, modifier des tricks</span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section>
+		<div class="section-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 mb100 wow">
+						<h2 class="section-heading">Derniers tricks</h2>
+						<h3 class="section-subheading secondary-font">Choisi ton favoris!</h3>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="col-md-12">
+					<ul class="portfolio-items nopadding-lr isotope list-unstyled">
+						{% for trick in tricks %}
+							<li class="col-sm-4 col-xs-12 portfolio-item nopadding-lr apps isotope-item">
+								<div class="hover-item">
+									<img src="{% if trick.pictures and trick.pictures is not empty %}{{asset('/assets/img/tricks/pictures/'~trick.pictures[0].name)}} {% else %} {{asset('/assets/img/tricks/pictures/default.jpg')}} {% endif %}" class="img-responsive smoothie" alt="">
+									<div class="overlay-item-caption smoothie"></div>
+									<div class="hover-item-caption smoothie">
+										<div class="vertical-center smoothie">
+											<h1 class="smoothie mb30">
+												<a href="{{ path("getTrick",{id:trick.id}) }}" title="name">{{ trick.name }}</a>
+											</h1>
+											<a href="{{ path("getTrick",{id:trick.id}) }}" class="smoothie btn btn-primary">Voir</a>
+											<br>
+											<a href="{{ path("edit_trick", {id:trick.id})}}" class="smoothie btn btn-primary fa fa-edit">
+												Modifier
+											</a>
+											<a href="{{ path("delete_trick" , {id:trick.id})}}" class="smoothie btn btn-primary fa fa-trash">
+												Supprimer
+											</a>
+										</div>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}

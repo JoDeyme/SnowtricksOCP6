@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{ Trick.name }}
+
+{% endblock %}
+{% block body %}
+
+	<section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{% if Trick.pictures and Trick.pictures is not empty %}{{asset('/assets/img/tricks/pictures/'~Trick.pictures[0].name)}} {% endif %} " data-speed="0.7">
+		<div class="section-inner text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 mt30 wow">
+						<h2 class="section-heading">{{ Trick.name }}</h2>
+						<div class="item-metas text-muted mb30 white">
+							<span class="meta-item">
+								<i class="pe-icon pe-7s-folder"></i>
+								Posté dans
+								<span>
+									{% for category in Trick.categories %}
+										{{ category.name }}
+									{% endfor %}
+								</span>
+							</span>
+							<span class="meta-item">
+								<i class="pe-icon pe-7s-user"></i>
+								AUTEUR
+								<span>{{ Trick.user.username }}</span>
+							</span>
+							<span class="meta-item">
+								<i class="pe-icon pe-7s-comment"></i>
+								COMMENTAIRES
+								<span>{{ Trick.comments|length }}
+								</span>
+							</span>
+							<span class="meta-item post-date">
+								<i class="pe-icon pe-7s-clock"></i>
+								Créé le
+								<span>{{ Trick.createAt|date("d/m/Y") }}</span>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="light-wrapper">
+
+		<ul class="owl-carousel-paged wow fadeIn list-unstyled post-slider" data-items="3" data-items-desktop="[1200,3]" data-items-desktop-small="[980,3]" data-items-tablet="[768,2]" data-items-mobile="[479,1]">
+			{% for p in Trick.pictures %}
+				<li>
+					<div class="hover-item mb30 post-slide">
+						<img src="/assets/img/tricks/pictures/{{ p.name }}" class=" img-responsive smoothie" alt="title">
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="item-content">
+						<h3 class="section-heading">Description</h3>
+						<p>{{ Trick.description }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<div class="item-content">
+						<h3 class="section-heading">Commentaires</h3>
+						<div class="comments card">
+							{% for comment in Trick.comments %}
+								<div class="comment card">
+									<div class="comment-author">
+										<img src="/assets/img/users/profile/1.jpg" alt="">
+										<div class="author-info">
+											<h4>{{ comment.User.name }}</h4>
+											<span class="comment-date">{{ comment.createAt|date("d/m/Y") }}</span>
+										</div>
+									</div>
+									<div class="comment-content">
+										<p>{{ comment.contentComment }}</p>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	{% if app.user %}
+		{{ form(CommentForm) }}{% endif %}
+
+	{% endblock %}
