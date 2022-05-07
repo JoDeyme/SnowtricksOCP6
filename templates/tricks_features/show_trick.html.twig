@@ -106,6 +106,19 @@
 
 
 	{% if app.user %}
-		{{ form(CommentForm) }}{% endif %}
+		<section class="section-inner text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2">
+						<h2 class="section-heading">Laissez un commentaire</h2>
+						{{ form_start(CommentForm) }}
+						{{ form_widget(CommentForm) }}
+						{{ form_end(CommentForm) }}
+					</div>
+				</div>
+			</div>
+		</section>
 
-	{% endblock %}
+	{% endif %}
+
+{% endblock %}
