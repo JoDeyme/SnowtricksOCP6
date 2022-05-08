@@ -53,16 +53,15 @@ class TrickFormType extends AbstractType
             ])
 
             ->add('pictures', FileType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
                 'label' => 'Photo de trick',
                 'multiple' => true,
                 'attr'     => [
+                    'class' => 'form-control',
                     'accept' => 'image/*',
                     'multiple' => 'multiple',
                     'maxSize' => '2M',
                 ],
+                
                 'mapped' => false, 
                 'required' => false,                                              
             ])
@@ -76,18 +75,13 @@ class TrickFormType extends AbstractType
                 'by_reference' => false,
             ])
 
-/*             ->add('videos', CollectionType::class, [
-                'entry_type' => UrlType::class,
-                'allow_add' => true,
-                'prototype' => true,
-                'prototype_data' => 'osef',
-                'by_reference' => false,
-                'allow_delete' => true,
-                'label' => false
-            ]) */
 
-
-            ->add('Submit', SubmitType::class, ['label' => 'Envoyer']);
+            ->add('Submit', SubmitType::class, [
+                'label' => 'Envoyer',
+                'attr' => [
+                    'class' => 'btn btn-primary',
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -56,44 +56,62 @@
 				</li>
 			{% endfor %}
 		</ul>
+	</section>
 
+	{% if Trick.videos is not empty %}
 
+		{% for video in Trick.videos %}
+			<section class="dark-wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<div class="item-content">
+								<h3 class="section-heading text-center">Vidéos</h3>
+								<div class="embed-responsive embed-responsive-16by9">
+									<iframe width="560" height="315" src="{{ video.path }}?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		{% endfor %}
+	{% endif %}
+
+	<section class="light-wrapper">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="item-content">
-						<h3 class="section-heading">Description</h3>
-						<p>{{ Trick.description }}</p>
+						<h3 class="section-heading text-center">Description</h3>
+						<p class="text-justify">{{ Trick.description }}</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<section>
+
+	<section class="dark-wrapper">
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ message }}
 			</div>
 		{% endfor %}
-
-
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2">
 					<div class="item-content">
-						<h3 class="section-heading">Commentaires</h3>
-						<div class="comments card">
+						<h3 class="section-heading text-center">Commentaires</h3>
+						<div class="comments">
 							{% for comment in Trick.comments %}
-								<div class="comment card">
-									<div class="comment-author">
-										<img src="/assets/img/users/profile/1.jpg" alt="">
-										<div class="author-info">
-											<h4>{{ comment.User.name }}</h4>
+								<div class="comment">
+									<div class="comment-content">
+										<div class="comment-header">
+											<h5 class="comment-author">{{ comment.user.username }}</h5>
 											<span class="comment-date">{{ comment.createAt|date("d/m/Y") }}</span>
 										</div>
-									</div>
-									<div class="comment-content">
-										<p>{{ comment.contentComment }}</p>
+										<p class="comment-text">{{ comment.contentComment }}</p>
 									</div>
 								</div>
 							{% endfor %}
@@ -111,14 +129,14 @@
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2">
 						<h2 class="section-heading">Laissez un commentaire</h2>
-						{{ form_start(CommentForm) }}
-						{{ form_widget(CommentForm) }}
-						{{ form_end(CommentForm) }}
+						<div class="item-metas text-muted mb30 white">
+							{{ form(CommentForm) }}
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 
-	{% endif %}
+		{% endif %}
 
-{% endblock %}
+	{% endblock %}

@@ -15,6 +15,15 @@
 			</div>
 		</div>
 	</header>
+	<!-- End Header -->
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<!-- Section -->
 
 	<section>
 		<div class="section-inner">

@@ -65,7 +65,11 @@ class TrickController extends AbstractController
             $entityManager->persist($trick);
             $entityManager->flush();
 
-            return $this->redirectToRoute('creation_trick_validate');
+            $this->addFlash(
+                'success',
+                'Votre trick a bien été créé');
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('/tricks_features/create_trick.html.twig', [
