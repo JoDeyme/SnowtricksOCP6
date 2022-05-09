@@ -79,13 +79,13 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/delete/{id}", name="delete_trick")
+     * @Route("/trick/delete/{slug}", name="delete_trick")
      */
 
-    public function deletetrick($id, EntityManagerInterface $entityManagerInterface, TrickRepository $trickRepository): Response
+    public function deletetrick(Trick $trick, EntityManagerInterface $entityManagerInterface, TrickRepository $trickRepository): Response
     
     {      
-        $trick=$trickRepository->find($id);
+        $trick = $trickRepository->find($trick->getId());
         if (!$this->getUser()) {
             $this->addFlash(
                 'warninglogin',
@@ -119,10 +119,10 @@ class TrickController extends AbstractController
     }
 
     /**
-     * @Route("/trick/edit/{id}", name="edit_trick",) 
+     * @Route("/trick/edit/{slug}", name="edit_trick",) 
      */
 
-    public function edittrick($id, Request $request, TrickRepository $trickRepository, UserRepository $userRepository, Filesystem $filesystem): Response
+    public function edittrick(Trick $trick, Request $request, TrickRepository $trickRepository, UserRepository $userRepository, Filesystem $filesystem): Response
         {
         if (!$this->getUser()) {
             $this->addFlash(
@@ -132,7 +132,7 @@ class TrickController extends AbstractController
 
             return $this->redirectToRoute('login');
         }
-        if ($trickRepository->find($id)->getUser()->getId() != $this->getUser()->getId()) {
+        if ($trickRepository->find($trick)->getUser()->getId() != $this->getUser()->getId()) {
             $this->addFlash(
                 'warninglogin',
                 'Vous ne pouvez pas modifier ce trick'
@@ -144,7 +144,7 @@ class TrickController extends AbstractController
 
         
 
-        $trick = $trickRepository->find($id);
+        $trick = $trickRepository->find($trick->getId());
         $form = $this->createForm(TrickFormType::class, $trick);
         $form->handleRequest($request);
 
@@ -215,17 +215,12 @@ class TrickController extends AbstractController
 
     
     /**
-     * @Route("/trick/{id}", name="getTrick")
+     * @Route("/trick/{slug}", name="getTrick")
      */
-    public function showtrick(TrickRepository $trickRepository, $id, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
+    public function showtrick(TrickRepository $trickRepository, Trick $trick, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
     {
-        $trick = $trickRepository->find($id);
+        $trick = $trickRepository->find($trick->getId());
         $comments = $commentRepository->findBy(["Trick" => $trick]);
-
-        if (!$trick) {
-            echo 'erreur';
-            return new Response();
-        }
 
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
@@ -246,7 +241,7 @@ class TrickController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Nouveau commentaire ajouté!');
-            return $this->redirectToRoute('getTrick', ['id' => $id]);
+            return $this->redirectToRoute('getTrick', ['slug' => $trick->getSlug()]);
         }
         $params = ["Trick" => $trick, "Comments" => $comments];
         if ($this->getUser()) {
@@ -254,4 +249,5 @@ class TrickController extends AbstractController
         }
         return $this->render('/tricks_features/show_trick.html.twig', $params);
     }
+    
 }

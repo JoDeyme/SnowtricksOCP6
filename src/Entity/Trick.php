@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=TrickRepository::class)
@@ -29,6 +30,16 @@ class Trick
      * @ORM\Column(type="string", length=180)
      */
     private $name;
+
+    /**
+     * @var string
+     * 
+     * @Gedmo\Slug(fields={"name"})
+     * 
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $slug;
+
 
     /**
      * @ORM\Column(type="text" )
@@ -90,7 +101,10 @@ class Trick
         return $this->id;
     }
 
-
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
 
     public function getName(): ?string
     {

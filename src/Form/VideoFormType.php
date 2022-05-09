@@ -26,6 +26,7 @@ class VideoFormType extends AbstractType
                 ],
             ])
             ->add('path', UrlType::class, [
+                
                 'attr' => [
                     'placeholder' => 'Lien de la vidéo',
                     'class' => 'form-control',

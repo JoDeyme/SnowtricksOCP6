@@ -29,7 +29,7 @@
 		<div class="section-inner">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 mb100 wow">
+					<div class="col-md-12 mb100 wow  text-center">
 						<h2 class="section-heading">Derniers tricks</h2>
 						<h3 class="section-subheading secondary-font">Choisi ton favoris!</h3>
 					</div>
@@ -46,15 +46,15 @@
 									<div class="hover-item-caption smoothie">
 										<div class="vertical-center smoothie">
 											<h1 class="smoothie mb30">
-												<a href="{{ path("getTrick",{id:trick.id}) }}" title="name">{{ trick.name }}</a>
+												<a href="{{ path("getTrick",{ slug:trick.slug }) }}" title="name">{{ trick.name }}</a>
 											</h1>
-											<a href="{{ path("getTrick",{id:trick.id}) }}" class="smoothie btn btn-primary">Voir</a>
+											<a href="{{ path("getTrick",{slug:trick.slug }) }}" class="smoothie btn btn-primary">Voir</a>
 											<br>
 											{% if is_granted('ROLE_USER') %}
-												<a href="{{ path("edit_trick", {id:trick.id})}}" class="smoothie btn btn-primary fa fa-edit">
+												<a href="{{ path("edit_trick", {slug:trick.slug })}}" class="smoothie btn btn-primary fa fa-edit">
 													Modifier
 												</a>
-												<a href="{{ path("delete_trick" , {id:trick.id})}}" class="smoothie btn btn-primary fa fa-trash">
+												<a href="{{ path("delete_trick" , {slug:trick.slug })}}" class="smoothie btn btn-primary fa fa-trash">
 													Supprimer
 												</a>
 											{% endif %}
