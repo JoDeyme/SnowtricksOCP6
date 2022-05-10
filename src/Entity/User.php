@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, nullable=true)
      */
-    private $profile_picture_name;
+    private $profilePictureName;
 
     /**
      * @ORM\Column(type="string", length=180, nullable=true)
@@ -200,12 +200,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getProfilePictureName(): ?string
     {
-        return $this->profile_picture_name;
+        return $this->profilePictureName;
     }
 
-    public function setProfilePictureName(?string $profile_picture_name): self
+    public function setProfilePictureName(?string $profilePictureName): self
     {
-        $this->profile_picture_name = $profile_picture_name;
+        $this->profilePictureName = $profilePictureName;
 
         return $this;
     }

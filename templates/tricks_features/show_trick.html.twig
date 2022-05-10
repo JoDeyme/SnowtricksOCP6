@@ -104,10 +104,11 @@
 					<div class="item-content">
 						<h3 class="section-heading text-center">Commentaires</h3>
 						<div class="comments">
-							{% for comment in Trick.comments %}
+							{% for comment in Comments %}
 								<div class="comment">
 									<div class="comment-content">
 										<div class="comment-header">
+											<img class="avatar comment-avatar" src="{{asset('assets/img/users/profile/'~ comment.user.profilePictureName )}}">
 											<h5 class="comment-author">{{ comment.user.username }}</h5>
 											<span class="comment-date">{{ comment.createAt|date("d/m/Y") }}</span>
 										</div>
@@ -115,6 +116,11 @@
 									</div>
 								</div>
 							{% endfor %}
+							<div class="pagination">
+								{% for i in 1..Pages %}
+									<a href="{{ path('getTrick',{slug:Trick.slug}) }}?page={{i}}">{{i}}</a>
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 				</div>

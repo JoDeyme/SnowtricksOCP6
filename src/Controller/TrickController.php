@@ -17,8 +17,9 @@ use App\Entity\Comment;
 use App\Entity\Picture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use App\Service\CustomPaginatorService;
 
-;
+
 
 class TrickController extends AbstractController
 {
@@ -217,10 +218,15 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="getTrick")
      */
-    public function showtrick(TrickRepository $trickRepository, Trick $trick, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
+    public function showtrick(CustomPaginatorService $customPaginatorService ,TrickRepository $trickRepository, Trick $trick, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
     {
         $trick = $trickRepository->find($trick->getId());
-        $comments = $commentRepository->findBy(["Trick" => $trick]);
+        /* $comments = $commentRepository->findBy(["Trick" => $trick]); */
+        $page = $request->query->get('page')?  $request->query->get('page'):1 ;
+        
+        $paginator = $customPaginatorService ->getCommentsByPage($page);
+        $comments = $paginator['comments'];
+        $pages = $paginator['pagesCount'];
 
         $comment = new Comment();
         $form = $this->createForm(CommentFormType::class, $comment);
@@ -243,7 +249,7 @@ class TrickController extends AbstractController
             $this->addFlash('success', 'Nouveau commentaire ajouté!');
             return $this->redirectToRoute('getTrick', ['slug' => $trick->getSlug()]);
         }
-        $params = ["Trick" => $trick, "Comments" => $comments];
+        $params = ["Trick" => $trick, "Comments" => $comments, "Pages" => $pages];
         if ($this->getUser()) {
             $params["CommentForm"] = $form->createView();
         }

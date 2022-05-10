@@ -2467,3 +2467,14 @@ footer.white-wrapper .social-links li a {
 .label-video {
     display: block !important;
 }
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: rgb(255, 255, 255);
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
