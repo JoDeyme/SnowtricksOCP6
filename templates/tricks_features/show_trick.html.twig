@@ -116,11 +116,13 @@
 									</div>
 								</div>
 							{% endfor %}
-							<div class="pagination">
-								{% for i in 1..Pages %}
-									<a href="{{ path('getTrick',{slug:Trick.slug}) }}?page={{i}}">{{i}}</a>
-								{% endfor %}
-							</div>
+							{% if Pages > 0 %}
+								<div class="pagination">
+									{% for i in 1..Pages %}
+										<a href="{{ path('getTrick',{slug:Trick.slug}) }}?page={{i}}">{{i}}</a>
+									{% endfor %}
+								</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>

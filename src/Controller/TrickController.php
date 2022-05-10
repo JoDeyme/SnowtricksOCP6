@@ -224,7 +224,7 @@ class TrickController extends AbstractController
         /* $comments = $commentRepository->findBy(["Trick" => $trick]); */
         $page = $request->query->get('page')?  $request->query->get('page'):1 ;
         
-        $paginator = $customPaginatorService ->getCommentsByPage($page);
+        $paginator = $customPaginatorService ->getCommentsByPage($page, 10, $trick);
         $comments = $paginator['comments'];
         $pages = $paginator['pagesCount'];
 

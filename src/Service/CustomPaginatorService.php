@@ -19,7 +19,7 @@ private $entityManager;
 
 
 
-    public function getCommentsByPage($page = 1, $pageSize = 5)
+    public function getCommentsByPage($page = 1, $pageSize = 10, $trick = false)
     {
         $comments = [];
 
@@ -27,10 +27,19 @@ private $entityManager;
         $developers = $this->entityManager->getRepository(Comment::class);
 
         // build the query for the doctrine paginator
-        $query = $developers->createQueryBuilder('c')
-                            ->orderBy('c.createAt', 'DESC')
-                            ->getQuery();
-
+        if($trick) {
+            $query = $developers->createQueryBuilder('c')
+                ->join('c.Trick', 't')
+                ->orderBy('c.createAt', 'DESC')
+                ->where('c.Trick = :trick')
+                ->setParameter('trick', $trick)
+                ->getQuery();
+        }else{
+            $query = $developers->createQueryBuilder('c')
+                ->orderBy('c.createAt', 'DESC')
+                ->getQuery();
+        }
+    
         // load doctrine Paginator
         $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($query);
 
