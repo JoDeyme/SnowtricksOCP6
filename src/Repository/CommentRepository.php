@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,8 +16,53 @@ use Doctrine\Persistence\ManagerRegistry;
 class CommentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
+
     {
         parent::__construct($registry, Comment::class);
+    }
+
+    
+
+    public function getCommentsByPage($page = 1, $pageSize = 10, $trick = false)
+    {
+        $comments = [];
+
+        // build the query for the doctrine paginator
+        if($trick) {
+            $query = $this->createQueryBuilder('c')
+                ->join('c.Trick', 't')
+                ->orderBy('c.createAt', 'DESC')
+                ->where('c.Trick = :trick')
+                ->setParameter('trick', $trick)
+                ->getQuery();
+        }else{
+            $query = $this->createQueryBuilder('c')
+                ->orderBy('c.createAt', 'DESC')
+                ->getQuery();
+        }
+    
+        // load doctrine Paginator
+        $paginator = new Paginator($query);
+
+        // you can get total items
+        $totalItems = count($paginator);
+
+        // get total pages
+        $pagesCount = ceil($totalItems / $pageSize);
+
+        // now get one page's items:
+        $firstResult = $pageSize * ($page-1);
+        $paginator
+            ->getQuery()
+            ->setFirstResult($firstResult) // set the offset
+            ->setMaxResults($pageSize); // set the limit
+
+        foreach ($paginator as $pageItem) {
+            $comments[] = $pageItem;
+        }
+
+        // return stuff..
+        return ['comments'=>$comments,'pagesCount'=>$pagesCount];
     }
 
     // /**

@@ -218,13 +218,13 @@ class TrickController extends AbstractController
     /**
      * @Route("/trick/{slug}", name="getTrick")
      */
-    public function showtrick(CustomPaginatorService $customPaginatorService ,TrickRepository $trickRepository, Trick $trick, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
+    public function showtrick(TrickRepository $trickRepository, Trick $trick, Request $request, CommentRepository $commentRepository, UserRepository $userRepository): Response
     {
         $trick = $trickRepository->find($trick->getId());
         /* $comments = $commentRepository->findBy(["Trick" => $trick]); */
         $page = $request->query->get('page')?  $request->query->get('page'):1 ;
         
-        $paginator = $customPaginatorService ->getCommentsByPage($page, 10, $trick);
+        $paginator = $commentRepository->getCommentsByPage($page, 10, $trick);
         $comments = $paginator['comments'];
         $pages = $paginator['pagesCount'];
 
