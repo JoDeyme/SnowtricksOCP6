@@ -37,4 +37,6 @@ Egalement ce site fonctionne avec des slugs pour permettre un meilleur confort d
 - Exécuter  la commande "composer install";
 - Exécuter la commande "php bin/console doctrine:database:create"
 
+NB: vous pouvez également utilise fichier OCP6.sql pour démarrer avec des fixtures optimisées pour ce projet.
+
 # Votre site communautaire est prêt à être utilisé !
