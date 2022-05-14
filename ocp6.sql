@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 10 mai 2022 à 05:43
+-- Généré le : sam. 14 mai 2022 à 15:35
 -- Version du serveur : 8.0.27
 -- Version de PHP : 7.4.26
 
@@ -293,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id`, `name`, `email`, `create_at`, `profile_picture_name`, `profile_picture_path`, `roles`, `password`, `is_verified`) VALUES
-(1, NULL, 'Jordan Deyme', 'jordan.deyme.perso@hotmail.fr', '2022-01-28 17:29:46', NULL, NULL, '[]', '$2y$13$z3UJciNTPAmsO7.mBfKM/umWZ2ytlYdUENNPH.DkcPqIehuRUffUO', 0),
+(1, NULL, 'Jordan Deyme', 'jordan.deyme.perso@hotmail.fr', '2022-01-28 17:29:46', 'jordan_profile.jpg', NULL, '[]', '$2y$13$z3UJciNTPAmsO7.mBfKM/umWZ2ytlYdUENNPH.DkcPqIehuRUffUO', 0),
 (2, NULL, 'Usertest', 'test@test.fr', '2022-01-31 19:37:08', 'C:\\wamp2022\\tmp\\php9211.tmp', NULL, '[]', '$2y$13$zWtqM9B6etU3jyNJIXzeeufGaeag6E.8oN/Au9/NrM7W4l3bQGVwe', 0),
 (3, NULL, 'Test N°13', 'test13@test.fr', '2022-02-23 18:07:22', '20201107173521-f2a34634.jpg', NULL, '[]', '$2y$13$FD1xm.7KolMawJVnmrPJQuy7V/yaL/IyyfBD69QBAd8A6xJB0FVIy', 0),
 (4, NULL, 'Test14', 'test14@test.fr', '2022-02-23 18:15:25', 'i.pdf', NULL, '[]', '$2y$13$lm1ykhRhme9y6coBq/GoquMFV62.9M1PAhdYu9G5GTDE6gZPZFuQy', 0),
