@@ -1,0 +1,5 @@
+
+
+Lien vers le github du projet : https://github.com/JoDeyme/SnowtricksOCP6 
+
+Lien vers l'analyse Codeclimate : https://codeclimate.com/github/JoDeyme/SnowtricksOCP6
