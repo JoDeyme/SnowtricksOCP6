@@ -1366,10 +1366,23 @@ textarea#comments {
     padding-bottom: 80px
 }
 
+.contenu {
+    flex: 1 0 auto;
+}
+
 footer.white-wrapper {
+    flex-shrink: 0;
+    width: 100%;
+
+
     padding: 60px 0;
+
+
+    height: 50px;
     background-color: #000;
 }
+
+
 
 footer.white-wrapper * {
     color: #fff;

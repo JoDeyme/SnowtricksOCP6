@@ -1,16 +1,41 @@
-{% block title %}Register
+{% extends "/base.html.twig" %}
+{% block title %}Inscription
 {% endblock %}
 
+{# ... #}
 {% block body %}
+	<section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg3.jpg')}}" data-speed="0.7">
+		<div class="section-inner text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 mt30 wow">
+						<h2 class="section-heading">S'inscrire</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	{% for flashError in app.flashes('verify_email_error') %}
 		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 	{% endfor %}
 
-	<h1>Register</h1>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="cta-block">
+						<div class="text-center">
+							<h3>Inscrivez-vous</h3>
+							<p>Vous êtes un nouvel utilisateur, s'inscrire dans notre site est très facile. Vous avez juste à remplir le formulaire ci-dessous !</p>
+						</div>
 
-	{{ form_start(registrationForm) }}
-	{{ form_errors(registrationForm) }}
-	{{ form_row(registrationForm.name, {
+						<h1>Register</h1>
+
+						{{ form_start(registrationForm) }}
+						{{ form_errors(registrationForm) }}
+						<div class="form-group">
+							{{ form_row(registrationForm.name, {
             label: 'Nom d\'utilisateur'
         }) }}
 	{{ form_row(registrationForm.email, {
@@ -22,8 +47,18 @@
     {{ form_row(registrationForm.profile_picture_name, {
             label: 'Photo de profil'
     }) }}   
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">S'inscrire</button>
+						</div>
+						{{ form_end(registrationForm) }}
+						</div>
 
 
-	<button type="submit" class="btn">S'enregistrer</button>
-	{{ form_end(registrationForm) }}
-{% endblock %}
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	{% endblock %}

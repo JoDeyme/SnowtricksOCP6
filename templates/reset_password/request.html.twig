@@ -1,22 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Reset your password
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-    <h1>Reset your password</h1>
 
-    {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>
-                Enter your email address and we will send you a
-                link to reset your password.
-            </small>
-        </div>
+	<section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg3.jpg')}}" data-speed="0.7">
+		<div class="section-inner text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 mt30 wow">
+						<h2 class="section-heading">Connexion</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-        <button class="btn btn-primary">Send password reset email</button>
-    {{ form_end(requestForm) }}
+	<section>
+		<div class="section-inner text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2">
+						<div class="mt30">
+
+
+							{% for flashError in app.flashes('reset_password_error') %}
+								<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+							{% endfor %}
+							<h1>
+								Réinitialisation du mot de passe
+							</h1>
+
+							{{ form_start(requestForm) }}
+							{{ form_row(requestForm.email) }}
+							<div>
+								<small>
+									Entrez votre adresse email ci-dessus et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+								</small>
+							</div>
+
+							<button class="btn btn-primary">
+								Envoyer le lien de réinitialisation
+							</button>
+							{{ form_end(requestForm) }}
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}
