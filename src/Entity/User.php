@@ -47,21 +47,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $profile_picture_path;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $role_id;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="User", orphanRemoval=true)
      */
     private $comments;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="User")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $role;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Trick::class, mappedBy="User")
@@ -222,17 +215,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRoleId(): ?int
-    {
-        return $this->role_id;
-    }
 
-    public function setRoleId(int $role_id): self
-    {
-        $this->role_id = $role_id;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comment[]
@@ -264,17 +247,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
 
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Trick[]

@@ -18,7 +18,9 @@ use App\Entity\Picture;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use App\Service\CustomPaginatorService;
-
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 
 
 class TrickController extends AbstractController
@@ -27,7 +29,7 @@ class TrickController extends AbstractController
      * @Route("/trick/new", name="creation_trick")
      */
 
-    public function createtrick(Request $request, TrickRepository $trickRepository, UserRepository $userRepository): Response
+    public function createtrick(Request $request, UserRepository $userRepository): Response
     {
         if (!$this->getUser()) {
             $this->addFlash(
@@ -206,7 +208,7 @@ class TrickController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(TrickRepository $trickRepository): Response
+    public function home(TrickRepository $trickRepository, MailerInterface $mailerInterface): Response
     {
         $tricks = $trickRepository->findAll();
 
